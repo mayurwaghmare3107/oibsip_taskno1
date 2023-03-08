@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style>
+		body {
+			background-color: #eee;
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+
+		h1 {
+			color: #666;
+			margin-top: 30px;
+		}
+
+		.container {
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+			display: inline-block;
+			margin-top: 50px;
+			padding: 20px;
+			text-align: center;
+		}
+
+		input[type="text"] {
+			background-color: #f2f2f2;
+			border: none;
+			border-radius: 5px;
+			font-size: 24px;
+			margin: 10px 0;
+			padding: 10px;
+			text-align: right;
+			width: 100%;
+		}
+
+		.row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		button {
+			background-color: #4CAF50;
+			border: none;
+			border-radius: 5px;
+			color: #fff;
+			font-size: 24px;
+			margin: 10px;
+			padding: 10px 20px;
+			width: calc(25% - 20px);
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+			cursor: pointer;
+		}
+
+		button:active {
+			background-color: #1e1e1e;
+		}
+
+		button:focus {
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calculator</h1>
+	<div class="container">
+		<input type="text" id="result" placeholder="0" readonly>
+		<div class="row">
+			<button onclick="addToResult('7')">7</button>
+			<button onclick="addToResult('8')">8</button>
+			<button onclick="addToResult('9')">9</button>
+			<button onclick="addToResult('/')">/</button>
+		</div>
+		<div class="row">
+			<button onclick="addToResult('4')">4</button>
+			<button onclick="addToResult('5')">5</button>
+			<button onclick="addToResult('6')">6</button>
+			<button onclick="addToResult('*')">*</button>
+		</div>
+		<div class="row">
+			<button onclick="addToResult('1')">1</button>
+			<button onclick="addToResult('2')">2</button>
+			<button onclick="addToResult('3')">3</button>
+			<button onclick="addToResult('-')">-</button>
+		</div>
+		<div class="row">
+			<button onclick="addToResult('0')">0</button>
+			<button onclick="addToResult('.')">.</button>
+			<button onclick="backspace()">&larr;</button>
+			<button onclick="addToResult('+')">+</button>
+		</div>
+		<div class="row">
+			<button onclick="clearResult()">C</button>
+			<button onclick="calculateResult()">=</button>
+		</div>
+	</div>
+
+	<script>
+		let result = document.getElementById("result");
+
+		function addToResult(value) {
+			result.value += value;
+		}
+        
+		function clearResult() {
+			result.value = "";
+		}
+
+		function backspace() {
+			result.value = result.value.slice(0, -1);
+		}
+
+		function calculateResult() {
+			let expression = result.value;
+			let answer = eval(expression);
+			result.value = answer;
+		}
+
+		// Get user input and output result
+		const form = document.getElementById("calculator-form");
+		const input = document.getElementById("user-input");
+		const output = document.getElementById("user-output");
+
+		form.addEventListener("submit", (e) => {
+			e.preventDefault();
+			const expression = input.value;
+			const answer = eval(expression);
+			output.textContent = `Result: ${answer}`;
+			input.value = "";
+		});
+	</script>
+</body>
+</html>
